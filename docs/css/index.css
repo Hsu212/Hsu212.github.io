@@ -151,9 +151,8 @@ body {
     height: 100%;
     object-fit: cover;
     animation: loopGif 5s infinite;
-    animation-fill-mode: both;
-    animation-iteration-count: initial;
-    -webkit-animation: infinite;
+    
+   
 }
 
 @keyframes loopGif {
