@@ -148,7 +148,6 @@ body {
 }
 .image-container img {
     width: 100%;
-    image-rendering: optimizeQuality;
     height: 100%;
     object-fit: cover;
     animation: loopGif 5s infinite;
