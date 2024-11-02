@@ -188,14 +188,14 @@ font-family: 'Ubuntu', sans-serif;
 .info-container h1 {
     font-size: 50px;
     margin: 0;
-    
+     align-self:flex-start;
     margin-bottom: 20px; /* Adjust as needed */
 }
 
 .info-container p {
     font-size: 20px;
     margin: 0;
-   
+    align-self:flex-start;
     text-align: justify;
 
 
