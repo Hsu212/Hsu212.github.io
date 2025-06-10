@@ -1,951 +1,376 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Htet Aung's Page</title>
-    <style>@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
-		* {
-		  margin: 0;
-		  padding: 0;
-		  box-sizing: border-box;
-		}
-		*::-moz-selection {
-		  background: #fd5d8d;
-		  color: #f1034a;
-		  color: #270245;
-		}
-		*::selection {
-		  background: #fd5d8d;
-		  color: #f1034a;
-		  color: #270245;
-		}
-		
-		html, body {
-		  width: 100%;
-		  height: 100%;
-		}
-		
-		body {
-		  position: relative;
-		  background: #000;
-		  
-		}
-		body:before {
-		  content: "";
-		  position: absolute;
-		  left: 0;
-		  top: 0;
-		  right: 0;
-		  bottom: 0;
-		  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
-		  z-index: 500;
-		  mix-blend-mode: overlay;
-		  pointer-events: none;
-		}
-		
-		.noise {
-		  position: fixed;
-		  top: 0;
-		  left: 0;
-		  width: 100vw;
-		  height: 100vh;
-		  overflow: hidden;
-		  z-index: 400;
-		  opacity: 0.8;
-		  pointer-events: none;
-		}
-		.noise:before {
-		  content: "";
-		  position: absolute;
-		  top: 0;
-		  left: 0;
-		  right: 0;
-		  bottom: 0;
-		  pointer-events: none;
-		  background-repeat: no-repeat;
-		  background-size: cover;
-		}
-		.noise-moving {
-		  opacity: 1;
-		  z-index: 450;
-		}
-		.noise-moving:before {
-		  will-change: background-position;
-		  animation: noise 1s infinite alternate;
-		}
-		
-		.scanlines {
-		  position: fixed;
-		  left: 0;
-		  top: 0;
-		  width: 100vw;
-		  height: 100vh;
-		  pointer-events: none;
-		  z-index: 300;
-		  opacity: 0.6;
-		  will-change: opacity;
-		  animation: opacity 3s linear infinite;
-		}
-		.scanlines:before {
-		  content: "";
-		  position: absolute;
-		  left: 0;
-		  top: 0;
-		  right: 0;
-		  bottom: 0;
-		  pointer-events: none;
-		  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 51%);
-		  background-size: 100% 4px;
-        
-		  will-change: background, background-size;
-		  animation: scanlines 0.1s linear infinite;
-		}
-		
-		.intro-wrap {
-		  position: fixed;
-		  top: 0;
-		  left: 0;
-		  font-family: "Press Start 2P", cursive;
-		  color: #fff;
-		  font-size: 2rem;
-		  width: 100vw;
-		  height: 100vh;
-          background-image:url('https://img.freepik.com/premium-photo/window-with-landscape-view-outdoors-nature-forest_53876-396798.jpg?ga=GA1.1.1787154511.1745574514&semt=ais_hybrid&w=740');
-          background-repeat: no-repeat;
-          background-size: cover;
-		}
-		.intro-wrap .noise:before {
-		  background-size: 200%;
-		}
-		.intro-wrap .play {
-		  position: absolute;
-		  left: 2rem;
-		  top: 2rem;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hsu Myat Wai Maung | Modern Portfolio 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-		  will-change: text-shadow;
-		  animation: rgbText 2s steps(9) 0s infinite alternate;
-		}
-		.intro-wrap .play .char {
-		  will-change: opacity;
-		  animation: type 1.2s infinite alternate;
-		  animation-delay: calc(60ms * var(--char-index));
-		}
-		.intro-wrap .time {
-		  position: absolute;
-		  right: 2rem;
-		  top: 2rem;
-
-		  will-change: text-shadow;
-		  animation: rgbText 1s steps(9) 0s infinite alternate;
-		}
-		.intro-wrap .recordSpeed {
-		  position: absolute;
-		  left: 2rem;
-		  bottom: 2rem;
-		  will-change: text-shadow;
-		  animation: rgbText 1s steps(9) 0s infinite alternate;
-		}
-		
-		/* Animations */
-		@keyframes noise {
-		  0%, 100% {
-			background-position: 0 0;
-		  }
-		  10% {
-			background-position: -5% -15%;
-		  }
-          
-		  
-		}
-		@keyframes opacity {
-		  0% {
-			opacity: 0.6;
-		  }
-		  20% {
-			opacity: 0.3;
-		  }
-		  35% {
-			opacity: 0.5;
-		  }
-		  50% {
-			opacity: 0.8;
-		  }
-		  60% {
-			opacity: 0.4;
-		  }
-		  80% {
-			opacity: 0.7;
-		  }
-		  100% {
-			opacity: 0.6;
-		  }
-		}
-		@keyframes scanlines {
-		  from {
-			background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 51%);
-			background-size: 100% 4px;
-		  }
-		  to {
-			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 50%, transparent 51%);
-			background-size: 100% 4px;
-		  }
-		}
-		@keyframes rgbText {
-		  0% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
-		  }
-		  25% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
-		  }
-		  45% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8), 0 5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8), 0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
-		  }
-		  50% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8), 0 -5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8), 0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
-		  }
-		  55% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 3px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
-		  }
-		  90% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8), 0 5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8), 0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
-		  }
-		  100% {
-			text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8), 0 -5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8), 0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
-		  }
-		}
-		@keyframes scanlines {
-		  from {
-			background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 51%);
-			background-size: 100% 4px;
-		  }
-		  to {
-			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 50%, transparent 51%);
-			background-size: 100% 4px;
-		  }
-		}
-        </style>
     <style>
-		@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
-		@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-*{
-	font-family: "Pixelify Sans", sans-serif}
-       
-   body {
-            margin: 0;
-            background-color: #360505;
-			font-family: "Press Start 2P", cursive;
-         
+        :root {
+            --header-height: 4rem;
+            --primary-color-dark: #3b82f6;
+            --primary-color-light: #2563eb;
+            --white-color: #ffffff;
+            --black-color: #000000;
         }
-        body.light-mode {
-            margin: 0;
-            background-color: #ffffff;
-           
+
+        /* Base & Theme Variables */
+        html {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --secondary-text-color: #8b949e;
+            --title-color: var(--white-color);
+            --primary-color: var(--primary-color-dark);
+            --card-bg-color: #161b22;
+            --border-color: #30363d;
+            --header-bg: rgba(13, 17, 23, 0.7);
         }
-        
-        
-      
-        .background {
+
+        html[data-theme='light'] {
+            --bg-color: #f6f8fa;
+            --text-color: #48515a;
+            --secondary-text-color: #6e7781;
+            --title-color: #24292f;
+            --primary-color: var(--primary-color-light);
+            --card-bg-color: var(--white-color);
+            --border-color: #d0d7de;
+            --header-bg: rgba(246, 248, 250, 0.7);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        /* Header - Glassmorphism */
+        .main-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: auto;
-            z-index: -1;
-            background-size: 100% 200vh;
-            background-position: 0% 0%;
-            animation: scroll 30s linear infinite;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-
-        nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1rem;
-    position: relative;
-}
-
-.icon {
-    position: absolute;
-    bottom: -100px; /* Adjust the position below the links */
-    left: 50%; /* Center it initially */
-    transform: translateX(-50%); /* Center it */
-    width: 150px; /* Adjust the size */
-    height: 100px; /* Adjust the size */
-    image-rendering: optimizeQuality;
-    background-image: url('https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-PNG-Clipart-Background.gif'); /* Your icon image */
-    background-size: contain; /* Make sure it fits */
-    background-repeat: no-repeat;
-    transition: left 0.3s ease; /* Smooth movement */
-}
-
-nav a:hover {
-    color: #e94f73ce; /* Change text color on hover */
-    
-            background-color: #f8f5f5;
-            border-radius: 6.5px;
-            padding: 5px 5px;
-            color: #080808;
-}
-
-nav a:hover ~ .icon {
-    left: calc(50% + 1rem); /* Move icon to the hovered link */
-}
-
-nav a:nth-child(1):hover ~ .icon {
-    left: calc(25%); /* Position for the first link */
-}
-nav a:nth-child(2):hover ~ .icon {
-    left: calc(50%); /* Position for the second link */
-}
-nav a:nth-child(3):hover ~ .icon {
-    left: calc(75%); /* Position for the third link */
-}
-nav a:nth-child(4):hover ~ .icon {
-    left: calc(90%); 
-}/* Position for the fourth link */
-
-        .hero {
-
-            image-rendering: optimizeQuality;
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #000000;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-			color: #ffffff;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
         
-        .hero p {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 2rem;
-        }
+        .main-nav { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .nav-logo { font-weight: 700; font-size: 1.5rem; color: var(--title-color); text-decoration: none; }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--primary-color); }
+        .theme-switch { display: flex; align-items: center; cursor: pointer; }
+        .theme-switch ion-icon { font-size: 1.5rem; color: var(--text-color); }
 
-        .projects-container {
-            padding: 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            grid-gap: 2rem;
-        }
-
-        .project {
-            background-color: #0f0f0f46;
-            backdrop-filter: 100px;
-            border-radius: 10px;
-            font-family: 'Times New Roman', Times, serif;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.753);
-            transition: transform 0.3s ease;
-        }
-
-		
-
-
-        .photo-frame {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-
-        }
-
-        .photo-frame img {
-
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
-
-
-
-        .project:hover {
-            background-color: #000000;
-            transform: translateY(-18px);
-        }
-
-        .project img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .project-content {
-
-            padding: 2rem;
-        }
-
-        .project h2 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        .project p {
-            font-size: 1rem;
-            color: #fffcfc;
-            margin-bottom: 1rem;
-        }
-
-        .achievements {
-            display: flex;
-            color: #fff;
-            justify-content: left;
-            align-items: center;
-            margin-top: 1rem;
-        }
-
-        .footer {
-            position: absolute;
-            width: 100%;
-            background: #00000044;
-            min-height: 100px;
-            padding: 20px 0px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .social-icon,
-        .menu {
+        /* Hero Section - Lottie Background */
+        #hero {
             position: relative;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            overflow: hidden;
         }
 
-        .social-icon__item,
-        .menu__item {
-            list-style: none;
+        .hero-lottie-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            min-width: 1200px;
+            min-height: 1200px;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.15;
         }
 
-        .social-icon__link {
-            font-size: 2rem;
-            color: #fff;
-            margin: 0 10px;
-            display: inline-block;
-            transition: 0.5s;
-        }
+        .hero-content { text-align: left; }
+        .hero-content h1 { font-size: 4rem; font-weight: 700; color: var(--title-color); line-height: 1.2; margin-bottom: 1.5rem; }
+        .hero-content h1 span { color: var(--primary-color); }
+        .hero-content p { font-size: 1.25rem; max-width: 600px; margin-bottom: 2rem; color: var(--secondary-text-color); }
+        .hero-button { display: inline-block; background-color: var(--primary-color); color: var(--white-color); padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hero-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25); }
 
-        .social-icon__link:hover {
-            transform: translateY(-10px);
-        }
+        /* General Section Styling */
+        section { padding: 6rem 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--title-color); }
 
-        .menu__link {
-            font-size: 1.2rem;
-            color: #fff;
-            margin: 0 10px;
-            display: inline-block;
-            transition: 0.5s;
-            text-decoration: none;
-            opacity: 0.75;
-            font-weight: 300;
-        }
-
-        .menu__link:hover {
-            opacity: 1;
-            color: #fff;
-            font-size: x-large;
-        }
-
-        .footer p {
-            color: #faf3f3;
-            margin: 15px 0 10px 0;
-            font-size: 1rem;
-            font-weight: 300;
-        }
-
-
-        .hero-button {
-            display: inline-block;
-            outline: 0;
-            border: 0;
-            font-family: 'Times New Roman', Times, serif;
-            cursor: pointer;
-            background: #0f0f0f46;
-            color: #FFFFFF;
-            border-radius: 8px;
-            padding: 14px 24px 16px;
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 1;
-            transition: transform 200ms, background 200ms;
-        }
-
-        .hero-button:hover {
-            background-color: #f8f5f5c9;
-            border-radius: 7px;
-            padding: 12px 24px 16px;
-            color: #080808;
-            font-size: x-large;
-
-            transform: translateY(-2px);
-        }
+        /* Modern Project Cards */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--card-bg-color); border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; transition: all 0.4s ease; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .project-image { height: 200px; background-size: cover; background-position: center; transition: transform 0.4s ease; }
+        .project-card:hover .project-image { transform: scale(1.05); }
+        .project-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-title { color: var(--title-color); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .project-description { color: var(--secondary-text-color); margin-bottom: 1rem; flex-grow: 1; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .project-tags span { background: var(--border-color); padding: 0.3rem 0.7rem; border-radius: 99px; font-size: 0.8rem; font-weight: 500; }
+        .project-link { color: var(--primary-color); text-decoration: none; font-weight: 500; align-self: flex-start; display: flex; align-items: center; gap: 0.5rem; }
+        .project-link ion-icon { transition: transform 0.3s ease; }
+        .project-link:hover ion-icon { transform: translateX(5px); }
         
-        .explore:hover{
-            color: #000000;
+        /* Modern "About Me" Section */
+        #about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
         }
+        .about-image-wrapper { position: relative; }
+        .about-image { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid var(--border-color); }
+        .about-content h2 { font-size: 2rem; color: var(--title-color); margin-bottom: 1rem; }
+        .about-content .about-intro { font-size: 1.1rem; color: var(--secondary-text-color); margin-bottom: 2rem; }
+        
+        .skills-title { font-size: 1.25rem; color: var(--title-color); margin-bottom: 1rem; }
+        .skills-list { list-style: none; padding: 0; }
+        .skill-item { margin-bottom: 1rem; }
+        .skill-name { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .skill-bar { height: 8px; background-color: var(--border-color); border-radius: 4px; overflow: hidden; }
+        .skill-level { height: 100%; background-color: var(--primary-color); width: 0; transition: width 1s ease-in-out; }
 
-        .project-button {
-            display: inline-block;
-            outline: 0;
-            border: 0;
-            font-family: 'Times New Roman', Times, serif;
-            cursor: pointer;
+        /* Footer */
+        .footer { background-color: var(--card-bg-color); padding: 3rem 0; text-align: center; border-top: 1px solid var(--border-color); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        .social-icons { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; list-style: none; }
+        .social-icons a { color: var(--text-color); font-size: 1.8rem; transition: color 0.3s ease, transform 0.3s ease; }
+        .social-icons a:hover { color: var(--primary-color); transform: translateY(-3px); }
+        .footer-menu { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; list-style: none; }
+        .footer-menu a { color: var(--text-color); text-decoration: none; transition: color 0.3s ease; }
+        .footer-menu a:hover { color: var(--primary-color); }
+        .footer p, #time-container { font-size: 0.9rem; opacity: 0.7; }
+        #time-container { margin-top: 1rem; }
 
-            background: #0f0f0f46;
-            color: #FFFFFF;
-            border-radius: 9px;
-            padding: 14px 24px 16px;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1;
-
-            transition: transform 200ms, background 200ms;
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #about .container { grid-template-columns: 1fr; }
+            .about-image-wrapper { display: flex; justify-content: center; margin-bottom: 2rem; }
         }
-
-        .social-github {
-            display: inline-block;
-            outline: 0;
-            border: 0;
-            font-family: 'Times New Roman', Times, serif;
-            cursor: pointer;
-
-            background: #0f0f0f46;
-            color: #FFFFFF;
-            border-radius: 9px;
-            padding: 0px 0px;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1;
-
-            transition: transform 200ms, background 200ms;
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 3rem; }
         }
-
-        .social-github:hover {
-            color: #000000;
-            background-color: rgba(255, 255, 255, 0);
-            transform: translateY(-2px);
-        }
-
-
-
-        .project-button:hover {
-            color: #000000;
-            background-color: white;
-            transform: translateY(-2px);
-        }
-
-
-
-        .explore {
-            text-decoration: none;
-            color: white;
-           
-            
-        }
-        .explore-hover {
-            .explore {
-            text-decoration: none;
-            color: #080808;
-           
-            
-        }
-        }
-
-
-        nav {
-            
-    
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-                    position: relative;
-                    background-color: #3f3c3c60;
-                    padding: 1rem;
-                    font-family: 'Courier New', Courier, monospace;
-                    display: flex;
-                    font-size: medium;
-                    justify-content: center;
-                    font-weight: bold;
-                }
-
 
     </style>
 </head>
-
 <body>
-    <div id="bg-wrap" class="background">
-
-		<div class="scanlines"></div>
-
-		<div class="intro-wrap">
-			<div class="noise"></div>
-			<div class="noise noise-moving"></div>
-		
-			<div class="play" data-splitting>
-			</div>
-			<div class="time">--:--</div>
-			<div class="recordSpeed"><p>The current time is: <span id="time"></span></p></div>
-		</div>
-        
-    </div>
-
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-        <div class="icon"></div> <!-- Placeholder for the moving icon -->
-    </nav>
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-		
-        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-        <dotlottie-player src="https://lottie.host/6cbe4059-130d-4ccf-a060-f68ae633ee66/yL5nDCElAZ.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-        <span class="highlight"><h1>Welcome to my portfolio!</h1></span>
-        <p>A showcase of my projects and skills.</p>
-        <button class="hero-button"><a class="explore" href="projects.html">Explore</a></button>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="projects-container">
-            <div class="project">
-                <img src="https://www.haskell.org/img/haskell-uwu.png"
-                    alt="Project 1">
-                <div class="project-content">
-                    <h2>Memory Game</h2>
-                    <p>This is the airline ticket booking website using only PHP, JS,CSS,HTML</p>
-                    <a href="https://github.com/Htet-2aung/Airline-Ticket-Booking-Website"><button
-                            class="project-button">Learn More</button></a>
-
-                    <div class="languages">
-                        <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
-                            style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                            <style type="text/css">
-                                .st00 {
-                                    fill: #F7DF1E;
-                                }
-                            </style>
-                            <g id="XMLID_1_">
-                                <rect id="XMLID_2_" x="67.5" y="67.5" class="st00" width="365" height="365" />
-                                <path id="XMLID_3_" d="M163.5,372.5l27.9-16.9c5.4,9.6,10.3,17.6,22,17.6c11.3,0,18.4-4.4,18.4-21.6V235.1h34.3v117.1
-                		c0,35.5-20.8,51.7-51.2,51.7C187.5,403.9,171.6,389.7,163.5,372.5" />
-                                <path id="XMLID_4_" d="M284.8,368.8l27.9-16.2c7.4,12,16.9,20.8,33.8,20.8c14.2,0,23.3-7.1,23.3-16.9c0-11.8-9.3-15.9-25-22.8
-                		l-8.6-3.7c-24.7-10.5-41.2-23.8-41.2-51.7c0-25.7,19.6-45.3,50.2-45.3c21.8,0,37.5,7.6,48.8,27.4l-26.7,17.1
-                		c-5.9-10.5-12.2-14.7-22-14.7c-10,0-16.4,6.4-16.4,14.7c0,10.3,6.4,14.5,21.1,20.8l8.6,3.7c29.2,12.5,45.6,25.2,45.6,53.9
-                		c0,30.9-24.3,47.8-56.8,47.8C315.4,403.9,294.8,388.7,284.8,368.8" />
-                            </g>
-
-                        </svg>
-
-                        <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
-                            style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                            <style type="text/css">
-                                .st0 {
-                                    fill: #1F72B5;
-                                }
-
-                                .st1 {
-                                    fill: #51A3DC;
-                                }
-
-                                .st2 {
-                                    fill: #EBEBEB;
-                                }
-
-                                .st3 {
-                                    fill: #CECECE;
-                                }
-                            </style>
-                            <g id="XMLID_1_">
-                                <polygon id="XMLID_11_" class="st0"
-                                    points="145.7,401.1 122.5,140.7 377.5,140.7 354.3,401 249.8,430 	" />
-                                <polygon id="XMLID_10_" class="st1"
-                                    points="250,407.9 334.4,384.5 354.3,162 250,162 	" />
-                                <polygon id="XMLID_35_" class="st2"
-                                    points="167.1,222.1 164,192 336,192 334,226.9 261.3,259 331,259 323.5,358 253.2,376.9 
-                		180.3,359.2 175.8,309 208,309 209.8,335.5 252,343.4 291,331.4 292.8,289 173,289 170.8,257.5 250,222.8 	" />
-                                <g id="XMLID_2_">
-                                    <polygon id="XMLID_39_" class="st3"
-                                        points="170.8,257.5 173,289 250,289 250,222.8 		" />
-                                    <polygon id="XMLID_40_" class="st3"
-                                        points="209.8,335.5 208,309 175.8,309 180.3,359.2 250,376.1 250,343 		" />
-                                    <polygon id="XMLID_41_" class="st3"
-                                        points="164,192 167.1,222.1 250,222.8 250,192 		" />
-                                </g>
-                                <g id="XMLID_36_">
-                                    <polygon id="XMLID_34_"
-                                        points="274,82 274,70 226,70 226,98 259,98 259,107 225,107 225,118 273,118 273,89 239,89 239,82 		" />
-                                    <polygon id="XMLID_38_"
-                                        points="187,98.3 187,107 221,107 221,118 173,118 173,89.3 173,70 220,70 220,82 187,82 		" />
-                                    <polygon id="XMLID_37_"
-                                        points="327,82 327,70 279,70 279,98 312,98 312,107 278,107 278,118 326,118 326,89 292,89 292,82 		" />
-                                </g>
-                            </g>
-                        </svg>
-
-
-                        <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
-                            style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                            <style type="text/css">
-                                .st007 {
-                                    fill: #E44D26;
-                                }
-
-                                .st111 {
-                                    fill: #F16529;
-                                }
-
-                                .st222 {
-                                    fill: #EBEBEB;
-                                }
-
-                                .st333 {
-                                    fill: #FFFFFF;
-                                }
-                            </style>
-                            <g id="XMLID_1_">
-                                <polygon id="XMLID_11_" class="st007"
-                                    points="145.7,401.1 122.5,140.7 377.5,140.7 354.3,401 249.8,430 	" />
-                                <polygon id="XMLID_10_" class="st111"
-                                    points="250,407.9 334.4,384.5 354.3,162 250,162 	" />
-                                <polygon id="XMLID_9_" class="st222" points="250,258.6 207.7,258.6 204.8,225.9 250,225.9 250,194 249.9,194 169.9,194 170.7,202.5 
-                		178.5,290.5 250,290.5 	" />
-                                <polygon id="XMLID_8_" class="st222" points="250,341.5 249.9,341.6 214.3,331.9 212,306.5 194.7,306.5 180,306.5 184.4,356.6 
-                		249.9,374.8 250,374.7 	" />
-                                <path id="XMLID_7_"
-                                    d="M146.2,70h16.2v16h14.8V70h16.2v48.5h-16.2v-16.3h-14.8v16.3h-16.2L146.2,70L146.2,70z" />
-                                <path id="XMLID_6_"
-                                    d="M214.8,86.1h-14.3V70h44.8v16.1h-14.3v32.4h-16.2L214.8,86.1L214.8,86.1z" />
-                                <path id="XMLID_5_"
-                                    d="M252.5,70h16.9l10.4,17.1L290.2,70h16.9v48.5H291V94.5l-11.2,17.3h-0.3l-11.2-17.3v24.1h-15.9V70z" />
-                                <path id="XMLID_4_" d="M315.2,70h16.2v32.5h22.8v16h-39V70z" />
-                                <polygon id="XMLID_3_" class="st333" points="249.9,258.6 249.9,290.5 289.2,290.5 285.5,331.9 249.9,341.5 249.9,374.8 315.3,356.6 
-                		315.8,351.2 323.3,267.2 324.1,258.6 315.5,258.6 	" />
-                                <polygon id="XMLID_2_" class="st333" points="249.9,194 249.9,213.8 249.9,225.8 249.9,225.9 326.9,225.9 326.9,225.9 327,225.9 
-                		327.7,218.7 329.1,202.5 329.9,194 	" />
-                            </g>
-                        </svg>
-
-                    </div>
+    <header class="main-header">
+        <nav class="container main-nav">
+            <a href="#" class="nav-logo">Hsu Myat</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#hero" class="nav-link active-link">Home</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="theme-switch" id="theme-toggle">
+                    <ion-icon name="moon-outline" id="theme-icon"></ion-icon>
                 </div>
             </div>
-            <div class="project">
-                <img src="https://cdn.macstories.net/cleanshot-2021-07-01-at-08-08-26-2x-1625144924133.jpg"
-                    alt="Project 2">
-                <div class="project-content">
-                    <h2>Hackintosh Monterey</h2>
-                    <p>
-                        This is an updated version of running Hackintosh MacOS Monterey 12.7.3 on my SONY VAIO with an Intel i3-6100U processor.
-                    </p>
-                    <a href="./projects.html"><button
-                            class="project-button">Learn More</button></a>
-                    <div>
-                       
-                    </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-lottie-bg">
+                <dotlottie-player src="https://lottie.host/5ea21608-5e63-4b4c-aba8-cadd105a6250/21GA8DNFnB.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
+            </div>
+            <div class="container hero-content">
+                <h1>Hi, I'm Hsu Myat. <br>A Creative <span>Developer</span>.</h1>
+                <p>I build modern, responsive, and user-friendly web applications. Explore my work and get to know more about my skills and passion for development.</p>
+                <a href="#projects" class="hero-button">View My Work</a>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid" id="projects-container">
+                     <div class="project-card">
+                           <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true');"></div>
+                           <div class="project-content">
+                                 <h3 class="project-title">PLATE.AI</h3>
+                                 <p class="project-description">A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates.</p>
+                                 <div class="project-tags">
+                                     <span>React</span>
+                                     <span>Python</span>
+                                     <span>FastAPI</span>
+                                     <span>YOLOv8</span>
+                                 </div>
+                                 <a href="https://github.com/Htet-2aung/PLATE.AI" target="_blank" class="project-link">View on GitHub <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                           </div>
+                     </div>
+                     <div class="project-card">
+                           <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop');"></div>
+                           <div class="project-content">
+                                 <h3 class="project-title">Airline Booking Site</h3>
+                                 <p class="project-description">A classic airline ticket booking website built with a foundational web stack, focusing on server-side logic and database interaction.</p>
+                                 <div class="project-tags">
+                                     <span>PHP</span>
+                                     <span>JavaScript</span>
+                                     <span>HTML/CSS</span>
+                                     <span>MySQL</span>
+                                 </div>
+                                 <a href="https://github.com/Htet-2aung/Airline-Ticket-Booking-Website" target="_blank" class="project-link">View on GitHub <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                           </div>
+                     </div>
                 </div>
             </div>
-            
-           
-            
-           
-           
-                
-          
+        </section>
 
-        </div>
-    </section>
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">About Me</h2>
+                    <p class="about-intro">I am a final-year Computer Science student passionate about the intersection of software development and artificial intelligence. My journey is driven by a curiosity to build intelligent systems that solve real-world problems.</p>
+                    <div class="skills-section">
+                        <h3 class="skills-title">My Technical Skills</h3>
+                        <ul class="skills-list">
+                            <li class="skill-item">
+                                <span class="skill-name">Python & Machine Learning</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="90%"></div></div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Full-Stack Development (React, PHP)</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="85%"></div></div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">R & Data Analysis</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+                            </li>
+                             <li class="skill-item">
+                                <span class="skill-name">DevOps & Linux Environments</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="75%"></div></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="about-image-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/146718691?v=4" alt="Hsu Myat Wai Maung" class="about-image">
+                </div>
+            </div>
+        </section>
+    </main>
     
-    <!-- About Section -->
-    <section id="about">
-        <div class="projects-container">
-            <div class="project">
-                <div class="project-content">
-                    <h2>Who am I? </h2>
-                    <div class="photo-frame">
-                        <img src="https://avatars.githubusercontent.com/u/146718691?v=4" alt="My Photo">
-                    </div>
-                    <p>I am a third-year computer science student with a diverse skill set. My programming expertise
-                        spans languages like
-                        Python, R, Rust and SQL, while I also have web development skills in PHP, HTML, CSS, and my expertise in Linux Environments such as Ubuntu,Fedora,Debian and Arch Linux. I am also proficient in using tools like Git, Docker, and Jupyter Notebook. I am passionate about Machine Learning and willing to become an expert in this field. I am also a quick learner and a team player, and I am always eager to learn new things and take on new challenges. I am currently looking for internships and job opportunities in the field of Data Science and Machine Learning. </p>
-                        </p>
-
-                    
-
-
-
-
-                </div>
+    <footer class="footer" id="contact">
+        <div class="container">
+             <ul class="social-icons">
+                <li><a href="https://github.com/Htet-2aung" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                <li><a href="mailto:kienbrowns1129@gmail.com"><ion-icon name="mail-outline"></ion-icon></a></li>
+            </ul>
+             <ul class="footer-menu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <p>&copy; 2025 Hsu Myat Wai Maung | All Rights Reserved</p>
+            <div id="time-container">
+                Current Time in Ho Chi Minh City: <span id="time"></span>
             </div>
         </div>
-    </section>
-
-    
-
-    <!-- Footer -->
-    <footer class="footer">
-
-        <ul class="social-icon">
-            <li class="social-icon__item"><a class="social-icon__link" href="https://github.com/Htet-2aung">
-                    <ion-icon name="logo-github"></ion-icon>
-                </a></li>
-            <li class="social-icon__item"><a class="social-icon__link" href="#">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                </a></li>
-            <li class="social-icon__item"><a class="social-icon__link" href="#">
-                    <ion-icon name="logo-tiktok"></ion-icon>
-                </a></li>
-            <li class="social-icon__item"><a class="social-icon__link" href="kienbrowns1129@gmail.com">
-                    <ion-icon name="logo-google"></ion-icon>
-                </a></li>
-        </ul>
-        <ul class="menu">
-            <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
-            <li class="menu__item"><a class="menu__link" href="#">About</a></li>
-            <li class="menu__item"><a class="menu__link" href="#">Projects</a></li>
-            <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
-            <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
-
-        </ul>
-        <p>&copy;2025 - 2025 Htet Aung | All Rights Reserved</p>
     </footer>
 
     <script>
-        // Add event listener to navigation links
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', event => {
-                event.preventDefault();
-                document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
+        // --- THEME SWITCHER ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            themeIcon.setAttribute('name', theme === 'light' ? 'sunny-outline' : 'moon-outline');
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
         });
 
-        // Trigger SVG animation on page load
-        window.addEventListener('load', () => {
-            document.querySelectorAll('svg rect').forEach(rect => {
-                rect.beginElement();
-            });
-        });
+        // --- SKILL BAR ANIMATION ---
+        const skillsSection = document.querySelector('.skills-section');
+        const skillLevels = document.querySelectorAll('.skill-level');
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    skillLevels.forEach(skill => {
+                        skill.style.width = skill.getAttribute('data-level');
+                    });
+                    observer.unobserve(skillsSection);
+                }
+            });
+        }, { threshold: 0.5 });
         
-    </script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
-    <script>
-        function toggleLightMode() {
-            document.body.classList.toggle("light-mode");
+        if (skillsSection) {
+            observer.observe(skillsSection);
         }
-    </script>
 
-    <script>
-        const username = 'Hsu212'; // Replace with your GitHub username
-        const reposUrl = `https://api.github.com/users/${username}/repos`;
-    
-        fetch(reposUrl)
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('projects-container');
-                container.innerHTML = ''; // Clear existing content
-    
-                data.forEach(repo => {
-                    const projectDiv = document.createElement('div');
-                    projectDiv.classList.add('project');
-    
-                    // Set the project image, if available (you could customize this)
-                    const imageSrc = 'https://images.unsplash.com/photo-1607799632518-da91dd151b38?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-    
-                    projectDiv.innerHTML = `
-                        <img src="${imageSrc}" alt="${repo.name}">
-                        <div class="project-content">
-                            <h2>${repo.name}</h2>
-                            <p>${repo.description || 'No description available.'}</p>
-                            <a href="${repo.html_url}"><button class="project-button">Learn More</button></a>
-                            <div class="languages">
-                                <!-- Example SVGs for languages can go here -->
-                                <svg width="50px" height="50px"><!-- SVG for a language icon --></svg>
-                                <!-- Add more SVGs as needed -->
-                            </div>
-                        </div>
-                    `;
-    
-                    container.appendChild(projectDiv);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching repositories:', error);
+        // --- ACTIVE LINK SCROLLING ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function scrollActive() {
+            const scrollY = window.pageYOffset;
+            sections.forEach(current => {
+                const sectionTop = current.offsetTop - 50;
+                const sectionId = current.getAttribute('id');
+                const navLink = document.querySelector('.nav-links a[href*=' + sectionId + ']');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + current.offsetHeight) {
+                    navLinks.forEach(link => link.classList.remove('active-link'));
+                    if (navLink) navLink.classList.add('active-link');
+                }
             });
-    </script>
-   <script>
-    document.getElementById('language-switch').addEventListener('click', function () {
-      // Replace with the actual URL of your Chinese version
-      window.location.href = './ch.html';
-    });
-  </script>
-  
-  <script>
-
-const sections = document.querySelectorAll('section[id]');
-
-function scrollActive() {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(current => {
-        const sectionHeight = current.offsetHeight,
-              sectionTop = current.offsetTop - 58,  // Adjust the offset for header if necessary
-              sectionId = current.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector('.nav__list a[href*=' + sectionId + ']').classList.add('active-link');
-        } else {
-            document.querySelector('.nav__list a[href*=' + sectionId + ']').classList.remove('active-link');
         }
-    });
-}
+        window.addEventListener('scroll', scrollActive);
 
-window.addEventListener('scroll', scrollActive);
+        // --- UPDATE TIME ---
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute:'2-digit', second:'2-digit' });
+            document.getElementById('time').textContent = timeString;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
 
-    
-function updateTime() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
-    
-    document.getElementById('time').textContent = timeString;
-}
-
-// Update the time immediately and then every second
-updateTime();
-setInterval(updateTime, 1000);
     </script>
 </body>
-
 </html>
