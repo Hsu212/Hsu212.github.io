@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hsu Myat Wai Maung | Modern Portfolio 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        :root {
+            --header-height: 4rem;
+            --primary-color-dark: #3b82f6;
+            --primary-color-light: #2563eb;
+            --white-color: #ffffff;
+            --black-color: #000000;
+        }
+
+        /* Base & Theme Variables */
+        html {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --secondary-text-color: #8b949e;
+            --title-color: var(--white-color);
+            --primary-color: var(--primary-color-dark);
+            --card-bg-color: #161b22;
+            --border-color: #30363d;
+            --header-bg: rgba(13, 17, 23, 0.7);
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #f6f8fa;
+            --text-color: #48515a;
+            --secondary-text-color: #6e7781;
+            --title-color: #24292f;
+            --primary-color: var(--primary-color-light);
+            --card-bg-color: var(--white-color);
+            --border-color: #d0d7de;
+            --header-bg: rgba(246, 248, 250, 0.7);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        /* Header - Glassmorphism */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .main-nav { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .nav-logo { font-weight: 700; font-size: 1.5rem; color: var(--title-color); text-decoration: none; }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--primary-color); }
+        .theme-switch { display: flex; align-items: center; cursor: pointer; }
+        .theme-switch ion-icon { font-size: 1.5rem; color: var(--text-color); }
+
+        /* Hero Section - Lottie Background */
+        #hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            overflow: hidden;
+        }
+
+        .hero-lottie-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            min-width: 1200px;
+            min-height: 1200px;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .hero-content { text-align: left; }
+        .hero-content h1 { font-size: 4rem; font-weight: 700; color: var(--title-color); line-height: 1.2; margin-bottom: 1.5rem; }
+        .hero-content h1 span { color: var(--primary-color); }
+        .hero-content p { font-size: 1.25rem; max-width: 600px; margin-bottom: 2rem; color: var(--secondary-text-color); }
+        .hero-button { display: inline-block; background-color: var(--primary-color); color: var(--white-color); padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hero-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25); }
+
+        /* General Section Styling */
+        section { padding: 6rem 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--title-color); }
+
+        /* Modern Project Cards */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--card-bg-color); border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; transition: all 0.4s ease; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .project-image { height: 200px; background-size: cover; background-position: center; transition: transform 0.4s ease; }
+        .project-card:hover .project-image { transform: scale(1.05); }
+        .project-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-title { color: var(--title-color); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .project-description { color: var(--secondary-text-color); margin-bottom: 1rem; flex-grow: 1; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .project-tags span { background: var(--border-color); padding: 0.3rem 0.7rem; border-radius: 99px; font-size: 0.8rem; font-weight: 500; }
+        .project-link { color: var(--primary-color); text-decoration: none; font-weight: 500; align-self: flex-start; display: flex; align-items: center; gap: 0.5rem; }
+        .project-link ion-icon { transition: transform 0.3s ease; }
+        .project-link:hover ion-icon { transform: translateX(5px); }
+        
+        /* Modern "About Me" Section */
+        #about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+        .about-image-wrapper { position: relative; }
+        .about-image { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid var(--border-color); }
+        .about-content h2 { font-size: 2rem; color: var(--title-color); margin-bottom: 1rem; }
+        .about-content .about-intro { font-size: 1.1rem; color: var(--secondary-text-color); margin-bottom: 2rem; }
+        
+        .skills-title { font-size: 1.25rem; color: var(--title-color); margin-bottom: 1rem; }
+        .skills-list { list-style: none; padding: 0; }
+        .skill-item { margin-bottom: 1rem; }
+        .skill-name { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .skill-bar { height: 8px; background-color: var(--border-color); border-radius: 4px; overflow: hidden; }
+        .skill-level { height: 100%; background-color: var(--primary-color); width: 0; transition: width 1s ease-in-out; }
+
+        /* Footer */
+        .footer { background-color: var(--card-bg-color); padding: 3rem 0; text-align: center; border-top: 1px solid var(--border-color); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        .social-icons { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; list-style: none; }
+        .social-icons a { color: var(--text-color); font-size: 1.8rem; transition: color 0.3s ease, transform 0.3s ease; }
+        .social-icons a:hover { color: var(--primary-color); transform: translateY(-3px); }
+        .footer-menu { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; list-style: none; }
+        .footer-menu a { color: var(--text-color); text-decoration: none; transition: color 0.3s ease; }
+        .footer-menu a:hover { color: var(--primary-color); }
+        .footer p, #time-container { font-size: 0.9rem; opacity: 0.7; }
+        #time-container { margin-top: 1rem; }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #about .container { grid-template-columns: 1fr; }
+            .about-image-wrapper { display: flex; justify-content: center; margin-bottom: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 3rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="container main-nav">
+            <a href="#" class="nav-logo">Hsu Myat</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#hero" class="nav-link active-link">Home</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="theme-switch" id="theme-toggle">
+                    <ion-icon name="moon-outline" id="theme-icon"></ion-icon>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-lottie-bg">
+                <dotlottie-player src="https://lottie.host/5ea21608-5e63-4b4c-aba8-cadd105a6250/21GA8DNFnB.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
+            </div>
+            <div class="container hero-content">
+                <h1>Hi, I'm Hsu Myat. <br>A Creative <span>Developer</span>.</h1>
+                <p>I build modern, responsive, and user-friendly web applications. Explore my work and get to know more about my skills and passion for development.</p>
+                <a href="#projects" class="hero-button">View My Work</a>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid" id="projects-container">
+                     <div class="project-card">
+                           <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true');"></div>
+                           <div class="project-content">
+                                 <h3 class="project-title">PLATE.AI</h3>
+                                 <p class="project-description">A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates.</p>
+                                 <div class="project-tags">
+                                     <span>React</span>
+                                     <span>Python</span>
+                                     <span>FastAPI</span>
+                                     <span>YOLOv8</span>
+                                 </div>
+                                 <a href="https://github.com/Htet-2aung/PLATE.AI" target="_blank" class="project-link">View on GitHub <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                           </div>
+                     </div>
+                     <div class="project-card">
+                           <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop');"></div>
+                           <div class="project-content">
+                                 <h3 class="project-title">Airline Booking Site</h3>
+                                 <p class="project-description">A classic airline ticket booking website built with a foundational web stack, focusing on server-side logic and database interaction.</p>
+                                 <div class="project-tags">
+                                     <span>PHP</span>
+                                     <span>JavaScript</span>
+                                     <span>HTML/CSS</span>
+                                     <span>MySQL</span>
+                                 </div>
+                                 <a href="https://github.com/Htet-2aung/Airline-Ticket-Booking-Website" target="_blank" class="project-link">View on GitHub <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                           </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">About Me</h2>
+                    <p class="about-intro">I am a final-year Computer Science student passionate about the intersection of software development and artificial intelligence. My journey is driven by a curiosity to build intelligent systems that solve real-world problems.</p>
+                    <div class="skills-section">
+                        <h3 class="skills-title">My Technical Skills</h3>
+                        <ul class="skills-list">
+                            <li class="skill-item">
+                                <span class="skill-name">Python & Machine Learning</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="90%"></div></div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Full-Stack Development (React, PHP)</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="85%"></div></div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">R & Data Analysis</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+                            </li>
+                             <li class="skill-item">
+                                <span class="skill-name">DevOps & Linux Environments</span>
+                                <div class="skill-bar"><div class="skill-level" data-level="75%"></div></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="about-image-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/146718691?v=4" alt="Hsu Myat Wai Maung" class="about-image">
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" id="contact">
+        <div class="container">
+             <ul class="social-icons">
+                <li><a href="https://github.com/Htet-2aung" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                <li><a href="mailto:kienbrowns1129@gmail.com"><ion-icon name="mail-outline"></ion-icon></a></li>
+            </ul>
+             <ul class="footer-menu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <p>&copy; 2025 Hsu Myat Wai Maung | All Rights Reserved</p>
+            <div id="time-container">
+                Current Time in Ho Chi Minh City: <span id="time"></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- THEME SWITCHER ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            themeIcon.setAttribute('name', theme === 'light' ? 'sunny-outline' : 'moon-outline');
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+
+        // --- SKILL BAR ANIMATION ---
+        const skillsSection = document.querySelector('.skills-section');
+        const skillLevels = document.querySelectorAll('.skill-level');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    skillLevels.forEach(skill => {
+                        skill.style.width = skill.getAttribute('data-level');
+                    });
+                    observer.unobserve(skillsSection);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // --- ACTIVE LINK SCROLLING ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function scrollActive() {
+            const scrollY = window.pageYOffset;
+            sections.forEach(current => {
+                const sectionTop = current.offsetTop - 50;
+                const sectionId = current.getAttribute('id');
+                const navLink = document.querySelector('.nav-links a[href*=' + sectionId + ']');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + current.offsetHeight) {
+                    navLinks.forEach(link => link.classList.remove('active-link'));
+                    if (navLink) navLink.classList.add('active-link');
+                }
+            });
+        }
+        window.addEventListener('scroll', scrollActive);
+
+        // --- UPDATE TIME ---
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute:'2-digit', second:'2-digit' });
+            document.getElementById('time').textContent = timeString;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+    </script>
+</body>
+</html>
