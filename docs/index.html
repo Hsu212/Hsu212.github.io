@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hsu Myat Wai Maung | Modern Portfolio</title>
     
-    <!-- Original Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- Terminal Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
     <!-- Ionicons for icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/@ionic/pwa-elements@3.2.2/dist/ionic.js"></script>
@@ -36,16 +33,6 @@
             --card-bg-color: #161b22;
             --border-color: #30363d;
             --header-bg: rgba(13, 17, 23, 0.7);
-
-            /* Terminal Colors (Dark) */
-            --terminal-bg: #000;
-            --terminal-title: var(--text-color);
-            --terminal-prompt-user: #8b5cf6;
-            --terminal-prompt-dir: #3b82f6;
-            --terminal-prompt-dollar: var(--text-color);
-            --terminal-output-text: #10b981;
-            --terminal-link: #8b5cf6;
-            --terminal-error: #ef4444;
         }
 
         html[data-theme='light'] {
@@ -57,16 +44,6 @@
             --card-bg-color: var(--white-color);
             --border-color: #d0d7de;
             --header-bg: rgba(240, 242, 245, 0.7);
-
-            /* Terminal Colors (Light) */
-            --terminal-bg: #e2e8f0;
-            --terminal-title: var(--title-color);
-            --terminal-prompt-user: #6d28d9;
-            --terminal-prompt-dir: #2563eb;
-            --terminal-prompt-dollar: var(--text-color);
-            --terminal-output-text: #047857;
-            --terminal-link: #6d28d9;
-            --terminal-error: #dc2626;
         }
 
         *, *::before, *::after {
@@ -138,7 +115,6 @@
             gap: 2rem; 
         }
         
-        /* New styles for the CSS liquid underline */
         .nav-links a { 
             color: var(--text-color); 
             text-decoration: none; 
@@ -146,7 +122,7 @@
             transition: color 0.3s ease; 
             position: relative;
             padding-bottom: 0.2rem;
-            display: block; /* Make sure the link is a block to contain the pseudo-element */
+            display: block;
         }
         .nav-links a::after {
             content: '';
@@ -171,12 +147,8 @@
         }
 
         @keyframes moveGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: -200% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            100% { background-position: -200% 50%; }
         }
         
         .theme-switch { 
@@ -273,106 +245,112 @@
             color: var(--title-color); 
         }
 
-        /* Terminal Section */
-        #terminal-section {
+        /* Projects Section */
+        #projects {
             background-color: var(--card-bg-color);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            padding: 4rem 0;
         }
-        .terminal-container {
-            max-width: 900px;
-            margin: auto;
-            border-radius: 1rem;
-            background-color: var(--terminal-bg);
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            min-height: 300px; /* For loading state */
+        }
+
+        .project-card {
+            background-color: var(--bg-color);
             border: 1px solid var(--border-color);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            font-family: 'Press Start 2P', monospace;
-            padding: 1.5rem;
-            min-height: 500px;
+            border-radius: 1rem;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .terminal-header {
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .project-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            color: var(--title-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-content p {
+            color: var(--secondary-text-color);
             margin-bottom: 1.5rem;
-            color: var(--terminal-title);
-            font-size: 0.8rem;
-            transition: color 0.3s ease;
+            flex-grow: 1;
         }
-        .terminal-dots {
+
+        .project-tags {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
-        .terminal-dots span {
-            width: 0.75rem;
-            height: 0.75rem;
-            border-radius: 9999px;
-        }
-        .terminal-dots span:nth-child(1) { background-color: #ef4444; }
-        .terminal-dots span:nth-child(2) { background-color: #f59e0b; }
-        .terminal-dots span:nth-child(3) { background-color: #22c55e; }
 
-        .terminal-output {
-            flex-grow: 1;
-            overflow-y: auto;
-            color: var(--terminal-output-text);
-            line-height: 1.6;
+        .project-tags span {
+            background-color: var(--primary-color-dark);
+            color: var(--white-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
             font-size: 0.8rem;
-            padding-right: 0.5rem;
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-            transition: color 0.3s ease;
+            font-weight: 500;
         }
-        .terminal-output::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-        .terminal-output p {
-            margin-bottom: 0.75rem;
-        }
-        .terminal-output ul {
-            list-style: none;
-            padding-left: 1rem;
-        }
-        .terminal-output li {
-            margin-bottom: 0.5rem;
-        }
-        .terminal-output .prompt-line {
-            display: flex;
-            align-items: center;
-            color: var(--terminal-prompt-dollar);
-            margin-bottom: 0.75rem;
-        }
-        .terminal-output .prompt-line .user { color: var(--terminal-prompt-user); }
-        .terminal-output .prompt-line .dir { color: var(--terminal-prompt-dir); }
-        .terminal-output .prompt-line .dollar { color: var(--terminal-prompt-dollar); }
-        .terminal-output .prompt-line .input-text { color: var(--text-color); }
 
-        .terminal-input-line {
+        html[data-theme='light'] .project-tags span {
+             background-color: var(--primary-color-light);
+        }
+
+        .project-links {
             display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .project-link {
+            display: inline-flex;
             align-items: center;
-            margin-top: 1.5rem;
-            color: var(--terminal-prompt-dollar);
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
             transition: color 0.3s ease;
         }
-        .terminal-input-line .user { color: var(--terminal-prompt-user); }
-        .terminal-input-line .dir { color: var(--terminal-prompt-dir); }
-        .terminal-input-line .dollar { color: var(--terminal-prompt-dollar); }
-        .terminal-input {
-            background: none;
-            border: none;
-            outline: none;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.8rem;
-            color: var(--terminal-output-text);
-            flex-grow: 1;
-            margin-left: 0.5rem;
-            transition: color 0.3s ease;
+
+        .project-link:hover {
+            opacity: 0.8;
+        }
+
+        .project-link ion-icon {
+            font-size: 1.2rem;
         }
 
         /* About Section */
@@ -405,7 +383,6 @@
             margin-bottom: 2rem; 
         }
         
-        /* New styles for the modern skills section */
         .tech-stack-section {
             margin-top: 2rem;
         }
@@ -538,18 +515,10 @@
             <a href="#" class="nav-logo">Hsu Myat</a>
             <div class="nav-menu">
                 <ul class="nav-links">
-                    <li>
-                        <a href="#hero" class="nav-link active-link">Home</a>
-                    </li>
-                    <li>
-                        <a href="#terminal-section" class="nav-link">Terminal</a>
-                    </li>
-                    <li>
-                        <a href="#about" class="nav-link">About</a>
-                    </li>
-                    <li>
-                        <a href="#contact" class="nav-link">Contact</a>
-                    </li>
+                    <li><a href="#hero" class="nav-link active-link">Home</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
                 <div class="theme-switch" id="theme-toggle">
                     <ion-icon name="moon-outline" id="theme-icon"></ion-icon>
@@ -566,35 +535,21 @@
             <div class="container hero-content">
                 <h1>Hi, I'm Hsu Myat. <br>A Creative <span>Developer</span>.</h1>
                 <p>I build modern, responsive, and user-friendly web applications. Explore my work and get to know more about my skills and passion for development.</p>
-                <a href="#terminal-section" class="hero-button">Start Terminal</a>
+                <a href="#projects" class="hero-button">View My Work</a>
             </div>
         </section>
 
-        <!-- New Terminal Section -->
-        <section id="terminal-section">
-            <div class="container terminal-container">
-                <div class="terminal-header">
-                    <div class="terminal-title">user@hsumyat:~</div>
-                    <div class="terminal-dots">
-                        <span style="background-color: #ef4444;"></span>
-                        <span style="background-color: #f59e0b;"></span>
-                        <span style="background-color: #22c55e;"></span>
-                    </div>
-                </div>
-
-                <div id="terminal-output" class="terminal-output">
-                    <p>Welcome to my portfolio! Type `<span style="color: var(--terminal-output-text);">help</span>` for a list of commands.</p>
-                    <br>
-                </div>
-
-                <div class="terminal-input-line">
-                    <span class="user">user@hsumyat</span><span class="dir">:~</span><span class="dollar">$</span>
-                    <input id="terminal-input" type="text" class="terminal-input" autofocus spellcheck="false" autocomplete="off">
+        <!-- Dynamic Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">My Recent Work</h2>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- GitHub projects will be loaded here -->
                 </div>
             </div>
         </section>
         
-        <!-- About Section (Updated) -->
+        <!-- About Section -->
         <section id="about">
             <div class="container">
                 <div class="about-content">
@@ -621,13 +576,13 @@
         <div class="container">
             <h3 class="contact-cta">Let's build something great together.</h3>
             <ul class="social-icons">
-                <li><a href="https://github.com/Htet-2aung" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
+                <li><a href="https://github.com/Hsu212" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
                 <li><a href="#" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-twitter"></ion-icon></a></li>
                 <li><a href="mailto:kienbrowns1129@gmail.com"><ion-icon name="mail-outline"></ion-icon></a></li>
             </ul>
             <ul class="footer-menu">
                 <li><a href="#hero">Home</a></li>
-                <li><a href="#terminal-section">Terminal</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
             <p class="footer-text">&copy; 2025 Hsu Myat Wai Maung | All Rights Reserved</p>
@@ -659,7 +614,6 @@
 
         // --- SECTION FADE-IN ---
         const sections = document.querySelectorAll('section');
-
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -667,7 +621,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 });
 
         sections.forEach(section => {
             observer.observe(section);
@@ -675,7 +629,6 @@
 
         // --- ACTIVE LINK SCROLLING ---
         const navLinks = document.querySelectorAll('.nav-links a');
-
         function scrollActive() {
             const scrollY = window.pageYOffset;
             sections.forEach(current => {
@@ -700,115 +653,85 @@
         }
         updateTime();
         setInterval(updateTime, 1000);
-        
-        // --- TERMINAL LOGIC ---
-        const terminalOutput = document.getElementById('terminal-output');
-        const terminalInput = document.getElementById('terminal-input');
-        
-        // Command data from the original projects section
-        const projectsData = [
-            {
-                title: 'PLATE.AI',
-                description: 'A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates.',
-                tags: ['React', 'Python', 'FastAPI', 'YOLOv8'],
-                link: 'https://github.com/Htet-2aung/PLATE.AI'
-            },
-            {
-                title: 'Airline Booking Site',
-                description: 'A classic airline ticket booking website built with a foundational web stack, focusing on server-side logic and database interaction.',
-                tags: ['PHP', 'JavaScript', 'HTML/CSS', 'MySQL'],
-                link: 'https://github.com/Htet-2aung/Airline-Ticket-Booking-Website'
-            }
-        ];
 
-        // Object containing the commands and their corresponding output functions
-        const commands = {
-            help: () => {
-                return `
-                    <p class="mb-2">Available commands:</p>
-                    <ul style="margin-left: 1rem;">
-                        <li><span style="color: var(--terminal-output-text);">about</span> - Get to know me.</li>
-                        <li><span style="color: var(--terminal-output-text);">projects</span> - View a list of my projects.</li>
-                        <li><span style="color: var(--terminal-output-text);">contact</span> - Find my contact information.</li>
-                        <li><span style="color: var(--terminal-output-text);">clear</span> - Clear the terminal screen.</li>
-                        <li><span style="color: var(--terminal-output-text);">whoami</span> - Display the current user.</li>
-                        <li><span style="color: var(--terminal-output-text);">help</span> - List all available commands.</li>
-                    </ul>
-                `;
-            },
-            about: () => {
-                return `
-                    <p>I am a final-year Computer Science student passionate about the intersection of software development and artificial intelligence.</p>
-                    <p>For more details and to see my technical skills, please scroll down to the "About Me" section.</p>
-                `;
-            },
-            projects: () => {
-                let output = `<p class="mb-2">Here is a list of my projects:</p>`;
-                projectsData.forEach(proj => {
-                    output += `
-                        <div style="margin-bottom: 1rem;">
-                            <p style="color: var(--terminal-output-text);">> ${proj.title}</p>
-                            <p style="color: var(--secondary-text-color); margin-left: 1rem;">- ${proj.description}</p>
-                            <p style="color: var(--terminal-prompt-dir); margin-left: 1rem;">- Tech Stack: ${proj.tags.join(', ')}</p>
-                            <a href="${proj.link}" target="_blank" style="color: var(--terminal-link); margin-left: 1rem; text-decoration: underline;">View on GitHub</a>
+        // --- DYNAMIC GITHUB PROJECTS ---
+        async function fetchGitHubProjects() {
+            const username = 'Hsu212';
+            const projectsGrid = document.getElementById('projects-grid');
+            projectsGrid.innerHTML = '<p>Fetching projects from GitHub...</p>';
+
+            // --- Configuration for project display ---
+            const includedRepos = [
+                'PLATE.AI',
+                'Car-Plate-Number-Recognition',
+                'MOTO-Music-Player'
+            ];
+
+            try {
+                const repoResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+                if (!repoResponse.ok) {
+                    throw new Error(`GitHub API error: ${repoResponse.status}`);
+                }
+                const allRepos = await repoResponse.json();
+
+                // 1. Filter to get only the specifically included repos (case-insensitive)
+                const includedReposLower = includedRepos.map(name => name.toLowerCase());
+                const finalProjects = allRepos.filter(repo => 
+                    includedReposLower.includes(repo.name.toLowerCase())
+                );
+
+
+                if (finalProjects.length === 0) {
+                    projectsGrid.innerHTML = '<p>Could not find the specified projects.</p>';
+                    return;
+                }
+                
+                // 2. Fetch languages for each of the selected projects
+                const projectsWithLanguages = await Promise.all(
+                    finalProjects.map(async (project) => {
+                        const langResponse = await fetch(project.languages_url);
+                        const languages = await langResponse.json();
+                        return { ...project, languages: Object.keys(languages) };
+                    })
+                );
+
+                // 3. Clear loading message and render project cards
+                projectsGrid.innerHTML = '';
+                projectsWithLanguages.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'project-card';
+
+                    const tagsHtml = project.languages.slice(0, 4).map(lang => `<span>${lang}</span>`).join('');
+                    
+                    projectCard.innerHTML = `
+                        <div class="project-image-wrapper">
+                            <img src="https://placehold.co/600x400/161b22/c9d1d9?text=${project.name}" alt="${project.name} Project" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3>${project.name}</h3>
+                            <p>${project.description || 'No description available.'}</p>
+                            <div class="project-tags">
+                                ${tagsHtml}
+                            </div>
+                            <div class="project-links">
+                                <a href="${project.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="logo-github"></ion-icon>
+                                    View Code
+                                </a>
+                            </div>
                         </div>
                     `;
+                    projectsGrid.appendChild(projectCard);
                 });
-                return output;
-            },
-            contact: () => {
-                return `
-                    <p>You can reach me at:</p>
-                    <p style="color: var(--terminal-output-text);">Email: kienbrowns1129@gmail.com</p>
-                    <p style="color: var(--terminal-link);">GitHub: <a href="https://github.com/Htet-2aung" target="_blank" style="color: var(--terminal-link); text-decoration: underline;">github.com/Htet-2aung</a></p>
-                `;
-            },
-            whoami: () => {
-                return `<p style="color: var(--terminal-output-text);">user@hsumyat</p>`;
-            },
-            clear: () => {
-                terminalOutput.innerHTML = '';
-            },
-        };
 
-        // Function to process a command and display the output
-        function executeCommand(command) {
-            const inputLine = document.createElement('div');
-            inputLine.className = 'prompt-line';
-            inputLine.innerHTML = `
-                <span class="user">user@hsumyat</span><span class="dir">:~</span><span class="dollar">$</span>
-                <span class="input-text" style="margin-left: 0.5rem;">${command}</span>
-            `;
-            terminalOutput.appendChild(inputLine);
-
-            const outputDiv = document.createElement('div');
-            if (commands[command]) {
-                const result = commands[command]();
-                if (command !== 'clear') {
-                    outputDiv.innerHTML = `<div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">${result}</div>`;
-                    terminalOutput.appendChild(outputDiv);
-                }
-            } else {
-                outputDiv.innerHTML = `<div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">Command not found: <span style="color: var(--terminal-error);">${command}</span>. Type '<span style="color: var(--terminal-output-text);">help</span>' for a list of commands.</div>`;
-                terminalOutput.appendChild(outputDiv);
+            } catch (error) {
+                console.error('Failed to fetch GitHub projects:', error);
+                projectsGrid.innerHTML = '<p style="color: #ef4444;">Could not load projects. Please check the console for details.</p>';
             }
-
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
 
-        // Event listener for the input field to handle 'Enter' key press
-        terminalInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const command = terminalInput.value.trim().toLowerCase();
-                if (command) {
-                    executeCommand(command);
-                    terminalInput.value = '';
-                }
-            }
-        });
-
-        // Ensure the input is focused on page load
-        terminalInput.focus();
+        // Fetch projects when the page loads
+        document.addEventListener('DOMContentLoaded', fetchGitHubProjects);
     </script>
 </body>
 </html>
