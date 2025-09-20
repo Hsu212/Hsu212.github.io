@@ -507,6 +507,26 @@
                 transform: translateY(0);
             }
         }
+
+        /* Added styles for fade-in text animation on hero h1 */
+        .fade-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--title-color);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .fade-text span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            animation-delay: calc(0.1s * var(--i));
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -533,7 +553,21 @@
                 <source src="https://motionbgs.com/media/3639/super-mario.960x540.mp4" type="video/mp4">
             </video>
             <div class="container hero-content">
-                <h1>Hi, I'm Hsu Myat. <br>A Creative <span>Developer</span>.</h1>
+                <h1 class="fade-text">
+                    <span style="--i:1">H</span><span style="--i:2">i</span><span style="--i:3">,</span>
+                    <span style="--i:4"> </span>
+                    <span style="--i:5">I</span><span style="--i:6">'</span><span style="--i:7">m</span>
+                    <span style="--i:8"> </span>
+                    <span style="--i:9">H</span><span style="--i:10">s</span><span style="--i:11">u</span>
+                    <span style="--i:12"> </span>
+                    <span style="--i:13">M</span><span style="--i:14">y</span><span style="--i:15">a</span><span style="--i:16">t</span><span style="--i:17">.</span>
+                    <br>
+                    <span style="--i:18">A</span>
+                    <span style="--i:19"> </span>
+                    <span style="--i:20">C</span><span style="--i:21">r</span><span style="--i:22">e</span><span style="--i:23">a</span><span style="--i:24">t</span><span style="--i:25">i</span><span style="--i:26">v</span><span style="--i:27">e</span>
+                    <span style="--i:28"> </span>
+                    <span style="--i:29">D</span><span style="--i:30">e</span><span style="--i:31">v</span><span style="--i:32">e</span><span style="--i:33">l</span><span style="--i:34">o</span><span style="--i:35">p</span><span style="--i:36">e</span><span style="--i:37">r</span><span style="--i:38">.</span>
+                </h1>
                 <p>I build modern, responsive, and user-friendly web applications. Explore my work and get to know more about my skills and passion for development.</p>
                 <a href="#projects" class="hero-button">View My Work</a>
             </div>
@@ -544,7 +578,114 @@
             <div class="container">
                 <h2 class="section-title">My Recent Work</h2>
                 <div class="projects-grid" id="projects-grid">
-                    <!-- GitHub projects will be loaded here -->
+                    <div class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="https://github.com/Htet-2aung/PLATE.AI/raw/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true" alt="PLATE.AI Demo" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3>PLATE.AI</h3>
+                            <p>A full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates, showcasing an end-to-end AI solution.</p>
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>Express</span>
+                                <span>Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Hsu212/PLATE.AI" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="code-outline"></ion-icon> View Code
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="eye-outline"></ion-icon> View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="https://github.com/Hsu212/Traffic-Signs-Detection/raw/main/batch/train_batch1.jpg" alt="Traffic-Signs-Detection Demo" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3>Traffic-Signs-Detection</h3>
+                            <p>This project aims to create a deep learning/computer vision model that can detect traffic signs globally and locally in Vietnam.</p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Hsu212/Traffic-Signs-Detection" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="code-outline"></ion-icon> View Code
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="eye-outline"></ion-icon> View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="ode.png" alt="Ode-Music-Player Demo" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3>Ode-Music-Player</h3>
+                            <p>Ode Music Player is a web-based application designed to provide a seamless music listening experience. It includes a sidebar menu for navigation, a footer with playback controls, and support for favorite songs and user profiles.
+</p>
+                            <div class="project-tags">
+                                <span>ReactJS</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Hsu212/Ode-Music-Player" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="code-outline"></ion-icon> View Code
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="eye-outline"></ion-icon> View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="https://github.com/Hsu212/Car-Plate-Number-Recognition-App/raw/main/Screenshot_11-5-2025_23144_localhost.jpeg" alt="Car-Plate-Number-Recognition-App Demo" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3>Car-Plate-Number-Recognition-App</h3>
+                            <p>The backend service uses a custom-trained YOLOv5 model to detect license plates in uploaded images. YOLO (You Only Look Once) is a real-time object detection algorithm known for its speed and accuracy.
+</p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>ReactJS</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Hsu212/Car-Plate-Number-Recognition-App" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="code-outline"></ion-icon> View Code
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="eye-outline"></ion-icon> View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="auracycle.png" alt="AuraCycle-Menstrual-Tracker Demo" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3>AuraCycle-Menstrual-Tracker</h3>
+                            <p>AuraCycle, a cute and user-friendly menstrual cycle tracker designed especially for girls! Track your cycle, understand your body better, and embrace your flow with a touch of pink. This web application is built to be fully responsive, providing a seamless experience on both mobile and desktop.</p>
+                            <div class="project-tags">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Hsu212/AuraCycle-Menstrual-Tracker" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="code-outline"></ion-icon> View Code
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <ion-icon name="eye-outline"></ion-icon> View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -653,85 +794,6 @@
         }
         updateTime();
         setInterval(updateTime, 1000);
-
-        // --- DYNAMIC GITHUB PROJECTS ---
-        async function fetchGitHubProjects() {
-            const username = 'Hsu212';
-            const projectsGrid = document.getElementById('projects-grid');
-            projectsGrid.innerHTML = '<p>Fetching projects from GitHub...</p>';
-
-            // --- Configuration for project display ---
-            const includedRepos = [
-                'PLATE.AI',
-                'Car-Plate-Number-Recognition',
-                'MOTO-Music-Player'
-            ];
-
-            try {
-                const repoResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-                if (!repoResponse.ok) {
-                    throw new Error(`GitHub API error: ${repoResponse.status}`);
-                }
-                const allRepos = await repoResponse.json();
-
-                // 1. Filter to get only the specifically included repos (case-insensitive)
-                const includedReposLower = includedRepos.map(name => name.toLowerCase());
-                const finalProjects = allRepos.filter(repo => 
-                    includedReposLower.includes(repo.name.toLowerCase())
-                );
-
-
-                if (finalProjects.length === 0) {
-                    projectsGrid.innerHTML = '<p>Could not find the specified projects.</p>';
-                    return;
-                }
-                
-                // 2. Fetch languages for each of the selected projects
-                const projectsWithLanguages = await Promise.all(
-                    finalProjects.map(async (project) => {
-                        const langResponse = await fetch(project.languages_url);
-                        const languages = await langResponse.json();
-                        return { ...project, languages: Object.keys(languages) };
-                    })
-                );
-
-                // 3. Clear loading message and render project cards
-                projectsGrid.innerHTML = '';
-                projectsWithLanguages.forEach(project => {
-                    const projectCard = document.createElement('div');
-                    projectCard.className = 'project-card';
-
-                    const tagsHtml = project.languages.slice(0, 4).map(lang => `<span>${lang}</span>`).join('');
-                    
-                    projectCard.innerHTML = `
-                        <div class="project-image-wrapper">
-                            <img src="https://placehold.co/600x400/161b22/c9d1d9?text=${project.name}" alt="${project.name} Project" class="project-image">
-                        </div>
-                        <div class="project-content">
-                            <h3>${project.name}</h3>
-                            <p>${project.description || 'No description available.'}</p>
-                            <div class="project-tags">
-                                ${tagsHtml}
-                            </div>
-                            <div class="project-links">
-                                <a href="${project.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">
-                                    <ion-icon name="logo-github"></ion-icon>
-                                    View Code
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    projectsGrid.appendChild(projectCard);
-                });
-
-            } catch (error) {
-                console.error('Failed to fetch GitHub projects:', error);
-                projectsGrid.innerHTML = '<p style="color: #ef4444;">Could not load projects. Please check the console for details.</p>';
-            }
-        }
-
-        // Fetch projects when the page loads
-        document.addEventListener('DOMContentLoaded', fetchGitHubProjects);
     </script>
 </body>
 </html>
