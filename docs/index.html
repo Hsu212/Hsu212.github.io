@@ -399,17 +399,44 @@
             gap: 1rem;
             margin-top: 1rem;
         }
-        .tech-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem;
-            background-color: var(--card-bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-weight: 500;
-        }
+        /* --- NEW STYLES FOR SKILLS TABS --- */
+.skills-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.tab-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-color);
+    border-radius: 99px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.tab-button:hover {
+    background-color: var(--border-color);
+}
+.tab-button.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+}
+.tab-panel {
+    display: none; /* Hide panels by default */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    animation: fadeInContent 0.5s ease;
+    min-height: 120px; /* Gives the area a consistent size */
+}
+.tab-panel.active {
+    display: grid; /* Show the active panel */
+}
+/* --- END OF NEW STYLES --- */
         .tech-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -689,14 +716,40 @@
                     <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">About Me</h2>
                     <p class="about-intro">I am a final-year Computer Science student passionate about the intersection of software development and artificial intelligence. My journey is driven by a curiosity to build intelligent systems that solve real-world problems.</p>
                     <div class="tech-stack-section">
-                        <h3 class="skills-title">My Technical Skills</h3>
-                        <div class="tech-stack-grid">
-                            <div class="tech-item"><ion-icon name="logo-python"></ion-icon><span>Python & ML</span></div>
-                            <div class="tech-item"><ion-icon name="code-slash-outline"></ion-icon><span>Full-Stack Dev</span></div>
-                            <div class="tech-item"><ion-icon name="analytics-outline"></ion-icon><span>R & Data Analysis</span></div>
-                            <div class="tech-item"><ion-icon name="server-outline"></ion-icon><span>DevOps & Linux</span></div>
-                        </div>
-                    </div>
+    <h3 class="skills-title">My Technical Skills</h3>
+    <div class="skills-tabs">
+        <button class="tab-button" data-tab="languages">Programming Languages</button>
+        <button class="tab-button" data-tab="frontend">Frontend</button>
+        <button class="tab-button" data-tab="backend">Backend</button>
+        <button class="tab-button" data-tab="database">Database</button>
+        <button class="tab-button" data-tab="tools">Tools</button>
+    </div>
+    <div class="skills-content">
+        <div class="tab-panel" id="languages">
+            <div class="tech-item"><span>Python</span></div>
+            <div class="tech-item"><span>JavaScript</span></div>
+            <div class="tech-item"><span>TypeScript</span></div>
+            <div class="tech-item"><span>HTML</span></div>
+            <div class="tech-item"><span>CSS</span></div>
+        </div>
+        <div class="tab-panel" id="frontend">
+            <div class="tech-item"><span>React</span></div>
+            <div class="tech-item"><span>Next.js</span></div>
+        </div>
+        <div class="tab-panel" id="backend">
+            <div class="tech-item"><span>Node.js</span></div>
+        </div>
+        <div class="tab-panel" id="database">
+            <div class="tech-item"><span>MySQL</span></div>
+            <div class="tech-item"><span>PostgreSQL</span></div>
+        </div>
+        <div class="tab-panel" id="tools">
+            <div class="tech-item"><span>Git & GitHub</span></div>
+            <div class="tech-item"><span>Docker</span></div>
+            <div class="tech-item"><span>Linux</span></div>
+        </div>
+    </div>
+</div>
                 </div>
                 <div class="about-image-wrapper">
                     <img src="https://avatars.githubusercontent.com/u/146718691?v=4" alt="Hsu Myat Wai Maung" class="about-image">
@@ -783,6 +836,32 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
         window.addEventListener('scroll', scrollActive);
+
+
+        // --- NEW SCRIPT FOR SKILLS TABS ---
+const tabsContainer = document.querySelector('.skills-tabs');
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabPanels = document.querySelectorAll('.tab-panel');
+
+if (tabsContainer) {
+    tabsContainer.addEventListener('click', (e) => {
+        if (e.target.matches('.tab-button')) {
+            const targetTab = e.target.dataset.tab;
+
+            // Update button states
+            tabButtons.forEach(button => button.classList.remove('active'));
+            e.target.classList.add('active');
+
+            // Update panel visibility
+            tabPanels.forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.id === targetTab) {
+                    panel.classList.add('active');
+                }
+            });
+        }
+    });
+}
 
         // --- UPDATE TIME ---
         function updateTime() {
